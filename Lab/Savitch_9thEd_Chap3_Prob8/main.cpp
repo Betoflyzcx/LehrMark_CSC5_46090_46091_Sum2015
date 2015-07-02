@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: Dr. Mark E. Lehr
  * Created on July 1, 2015, 10:20 PM
- * Purpose:  Monthly Payments
+ * Purpose:  Approximate PI
  */
 
 //System Libraries
@@ -14,7 +14,7 @@ using namespace std;
 //User Libraries
 
 //Global Constants
-const float PI=4*atan(1);
+const double PI=4*atan(1.0);
 
 //Function Prototypes
 
@@ -22,11 +22,11 @@ const float PI=4*atan(1);
 int main(int argc, char** argv) {
     //Declare and initialize variables
     int nTerms=200000000;
-    float apprxPI=1;
+    long double apprxPI=1.0L;
     
     //Now calculate PI with a for-loop
     for(int i=3,nTerm=1;nTerm<=nTerms;i+=4,nTerm+=2){
-        apprxPI+=(-1.0f/i+1.0f/(i+2));
+        apprxPI+=(-1.0L/i+1.0L/(i+2));
     }
     apprxPI*=4;
     

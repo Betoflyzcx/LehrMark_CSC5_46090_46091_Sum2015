@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     //Set the random seed
     srand(static_cast<unsigned int>(time(0)));
     //Declare variables
-    unsigned short op1,op2,result,answer;
+    short op1,op2,result,answer;
     char op;
     bool doAgain;
     
