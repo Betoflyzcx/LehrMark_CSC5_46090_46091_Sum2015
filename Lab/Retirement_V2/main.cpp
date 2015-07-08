@@ -28,11 +28,11 @@ int main(int argc, char** argv) {
     float year=0;       //Start at year 0
     
     //Calculate required savings
-    savReq=salary/invRate;
+    savReq=salary/invRate; //Required Savings
+    deposit=pDep*salary;   //Deposit based salary
     
     //Loop to calculate when Retirement is possible
     do{
-        deposit=pDep*salary; //Deposit based salary
         savings*=(1+invRate);//Earning based upon investment rate
         savings+=deposit;    //Add the deposit after earning interest
         year++;
