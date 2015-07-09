@@ -32,7 +32,6 @@ int main(int argc, char** argv) {
     for(int game=1;game<=nGames;game++){
         int sum=roll(6,2);
         switch(sum){
-            case 1: plyAgn++;break;
             case 2: 
             case 3: lose++;break;
             case 4: 
