@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(0)));
     
     //Declare Variables
-    const int SIZE=10;
+    const int SIZE=200;
     int array[SIZE];
     
     //Initialize the array
