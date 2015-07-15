@@ -80,7 +80,7 @@ int  binSrch(int a[],int &first,int &last,int val){
         if(a[middle]==val)     return middle;
         else if(val<a[middle]) last=middle-1;
         else                   first=middle+1;
-    }while(first<last);
+    }while(first<=last);
     //Exit routine
     return -1;
 }
