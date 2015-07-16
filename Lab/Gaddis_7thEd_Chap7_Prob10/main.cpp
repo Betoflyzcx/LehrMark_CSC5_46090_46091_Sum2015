@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     //Grade the Test
     int score=grade(qstns,answrs,rhtwrg,SIZE);
     
-    //Output the initial array
+    //Output the initial arrays and the results
     cout<<"The Test Question Solutions"<<endl;
     prntAry(qstns,SIZE,5);
     cout<<"The Test Question Answers"<<endl;
