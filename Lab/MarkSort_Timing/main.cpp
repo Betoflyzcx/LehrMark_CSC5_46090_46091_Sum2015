@@ -21,7 +21,8 @@ void prntAry(const int [],int,int);
 void swap(int &,int &);
 void swapMin(int [],int,int);
 void markSrt(int [],int);
-int  linSrch(int [],int,int);
+void mrkSrt2(int [],int);
+void copy(int [],int [],int);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
@@ -29,54 +30,80 @@ int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(0)));
     
     //Declare Variables
-    const int SIZE=200;
-    int array[SIZE];
+    const int SIZE=100000;
+    int array[SIZE],brray[SIZE];
     
     //Initialize the array
     filAray(array,SIZE);
     
-    //Output the initial array
-    prntAry(array,SIZE,20);
+    //Copy the random array
+    copy(array,brray,SIZE);
     
-    //Process the inputs
-    markSrt(array,SIZE);
+    //Output the initial array
+    //prntAry(array,SIZE,20);
+    //prntAry(brray,SIZE,20);
+    
+    //Process the inputs for the first sort
+    unsigned int start=time(0);
+    markSrt(array,SIZE);//3 function sort
+    unsigned int end=time(0);
+    cout<<"Total time 3 function sort "<<end-start<<"(secs)"<<endl;
+
+    //Process the inputs for the second sort
+    start=time(0);
+    mrkSrt2(brray,SIZE);//1 function sort
+    end=time(0);
+    cout<<"Total time 1 function sort "<<end-start<<"(secs)"<<endl;
     
     //Output the results
-    prntAry(array,SIZE,20);
+    //prntAry(array,SIZE,20);
+    //prntAry(brray,SIZE,20);
     
-    //Test the search routine
-    int value=rand()%90+10;
-    int pos=linSrch(array,SIZE,value);
-    if(pos==-1)cout<<value<<" was not found!"<<endl;
-    else cout<<value<<" was found at array["<<pos<<"]!"<<endl;
-    value=0;
-    pos=linSrch(array,SIZE,value);
-    if(pos==-1)cout<<value<<" was not found!"<<endl;
-    else cout<<value<<" was found at array["<<pos<<"]!"<<endl;
-
     //Exit Stage Right
     return 0;
 }
 
 /**************************************************
- *              Linear Search                     *
+ *                Mark Sort 2                     *
  **************************************************
- * Purpose:  To find where a value resides
+ * Purpose:  To sort any integer array but in 
+ *           1 function call
  * Input:
  *    n-> The size of the array
- *    a-> The integer Array
- *    val->The value to search find
- * Output:
- *    Position where val was found
+ * Input-Output:
+ *    a-> The sorted integer Array
  */
-int  linSrch(int a[],int n,int val){
-    //Loop until value is found
-    for(int i=0;i<n;i++){
-        //Report back if found
-        if(a[i]==val)return i;
+void mrkSrt2(int a[],int n){
+    //Loop and sort every position
+    for(int pos=0;pos<n-1;pos++){
+        //Loop through the list starting at pos+1
+        for(int i=pos+1;i<n;i++){
+            //Place smallest value at the position pos
+            if(a[pos]>a[i]){
+                //Perform the logical in-place swap
+                a[pos]=a[pos]^a[i];
+                a[i]=a[pos]^a[i];
+                a[pos]=a[pos]^a[i];
+            }
+        }
     }
-    //If not found, then use sentinel
-    return -1;
+}
+
+/**************************************************
+ *                Copy Array                      *
+ **************************************************
+ * Purpose:  To copy an integer array
+ * Input:
+ *    n-> The size of the array
+ * Input-Output:
+ *    a-> The original integer Array
+ *    b-> The copied integer Array
+ */
+void copy(int a[],int b[],int n){
+    //Loop on all elements
+    for(int i=0;i<n;i++){
+        b[i]=a[i];
+    }
 }
 
 /**************************************************
@@ -157,7 +184,7 @@ void prntAry(const int a[],int n,int nCols){
 /**************************************************
  *                Fill Array                      *
  **************************************************
- * Purpose:  To fill an array with 2 digit integer
+ * Purpose:  To fill an array with integer
  *           random numbers.
  * Input:
  *    n-> The size of the array
@@ -166,8 +193,8 @@ void prntAry(const int a[],int n,int nCols){
  * Output:
  */
 void filAray(int a[],int n){
-    //Loop on every element and equate to 2 digits
+    //Loop on every element
     for(int i=0;i<n;i++){
-        a[i]=rand()%90+10;//[10-99]
+        a[i]=rand();
     }
 }
