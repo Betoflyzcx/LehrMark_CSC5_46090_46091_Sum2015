@@ -22,7 +22,7 @@ void swap(int &,int &);
 void swapMin(int [],int,int);
 void markSrt(int [],int);
 int  linSrch(int [],int,int,int);
-int  cntDup(int [],int,int);
+int  cntDup(int [],int,int,int);
 int  binSrch(int [],int &,int &,int);
 
 //Execution Begins Here!
@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
     int start=0,end=SIZE;
     int pos=binSrch(array,start,end,value);
     cout<<value<<" was found at "<<pos<<endl;
-    cout<<value<<" was found "<<cntDup(array,SIZE,value);
+    cout<<value<<" was found "<<cntDup(array,start,end,value);
     cout<<" times"<<endl;
     cout<<"Beginning Range = "<<start<<endl;
     cout<<"Ending Range = "<<end<<endl;
@@ -91,19 +91,19 @@ int  binSrch(int a[],int &first,int &last,int val){
  * Purpose:  To find the number of occurrences of
  *           value in the array
  * Input:
- *    n-> The size of the array
+ *    end-> End the search at this index
  *    a-> The integer Array
  *    val->The value to search find
  * Output:
  *    How many times val was found
  */
-int  cntDup(int a[],int n,int val){
+int  cntDup(int a[],int strt,int end,int val){
     //Declare variables
     int count=0,pos=-1;
     
     //Find the number of occurrences 
     do{
-        pos=linSrch(a,n,++pos,val);
+        pos=linSrch(a,++pos,end,val);
         count++;
     }while(pos>=0);
     
@@ -116,16 +116,16 @@ int  cntDup(int a[],int n,int val){
  **************************************************
  * Purpose:  To find where a value resides
  * Input:
- *    n-> The size of the array
+ *    end-> The end the search
  *    a-> The integer Array
  *    val->The value to search find
  *    strt->Where to start the search
  * Output:
  *    Position where val was found
  */
-int  linSrch(int a[],int n,int strt,int val){
+int  linSrch(int a[],int strt,int end,int val){
     //Loop until value is found
-    for(int i=strt;i<n;i++){
+    for(int i=strt;i<end;i++){
         //Report back if found
         if(a[i]==val)return i;
     }
