@@ -85,12 +85,12 @@ Array * rdStruc(fstream &file){
     file.clear();
     file.seekg(0L, ios::beg); 
     //Read the size from the file
-    file.read(reinterpret_cast<char *>(&a->size),sizeof(a->size));
+    file.read(reinterpret_cast<char *>(&a->size),sizeof(int));
     //Allocate the data array
     a->data=new int[a->size];
     //Read the array from the file
     file.read(reinterpret_cast<char *>(a->data),
-                          a->size*sizeof(a->size));
+                          a->size*sizeof(int));
     //Return the Array
     return a;
 }
