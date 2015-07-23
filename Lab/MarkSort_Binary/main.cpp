@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
     Array *brray=rdStruc(file);
     prntAry(brray,20);
     
-    //Deallocate memory and closing files
+    //Deallocate memory and close file
     delete []array->data;
     delete []brray->data;
     delete array;
