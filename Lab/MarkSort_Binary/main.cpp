@@ -106,10 +106,10 @@ Array * rdStruc(fstream &file){
  */
 void wrtStrc(fstream & file,Array *a){
     //Write the size of the array
-    file.write(reinterpret_cast<char *>(&a->size),sizeof(a->size));
+    file.write(reinterpret_cast<char *>(&a->size),sizeof(int));
     //Write the array elements
     file.write(reinterpret_cast<char *>(a->data),
-                          a->size*sizeof(a->size));
+                          a->size*sizeof(int));
 }
 
 /**************************************************
