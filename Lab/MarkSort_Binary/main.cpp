@@ -7,8 +7,10 @@
 
 //System Libraries
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 using namespace std;
 
 //User Libraries
@@ -22,29 +24,92 @@ void prntAry(const Array *,int);
 void swap(int &,int &);
 void swapMin(int [],int,int);
 void markSrt(int [],int);
+void wrtStrc(fstream &,Array *);
+Array * rdStruc(fstream &);
 
 //Execution Begins Here!
 int main(int argc, char** argv) {
     //Set the random number seed
     srand(static_cast<unsigned int>(time(0)));
     
+    //Prepare for reading and writing to a file
+    string filename="Binary.dat";
+    fstream file;
+    file.open(filename.c_str(),ios::in|ios::out|ios::binary);
+    
     //Declare Variables
     int size=200;
     Array *array=filAray(size);
     
     //Output the initial array
+    cout<<"The Original Array"<<endl;
     prntAry(array,20);
     
     //Process the inputs
     markSrt(array->data,array->size);
     
-    //Output the results
+    //Output the sorted result
+    cout<<"The Sorted Array"<<endl;
     prntAry(array,20);
-
-    //Exit Stage Right
+    
+    //Write this to a file, Read it back, then print the results
+    cout<<"The array output to a file then read back in and printed out"<<endl;
+    wrtStrc(file,array);
+    Array *brray=rdStruc(file);
+    prntAry(brray,20);
+    
+    //Deallocate memory and closing files
     delete []array->data;
+    delete []brray->data;
     delete array;
+    delete brray;
+    file.close();
+    
+    //Exit Stage Right
     return 0;
+}
+
+/**************************************************
+ *         Read a Structure from a File           *
+ **************************************************
+ * Purpose:  Read array structure from a file
+ * Input:
+ *    file-> Where to read
+ * Output:
+ *    a-> The structure that contains the data
+ */
+Array * rdStruc(fstream &file){
+    //Declare a structure pointer
+    Array *a=new Array;//Allocate memory for the structure
+    //Go to the beginning
+    file.clear();
+    file.seekg(0L, ios::beg); 
+    //Read the size from the file
+    file.read(reinterpret_cast<char *>(&a->size),sizeof(a->size));
+    //Allocate the data array
+    a->data=new int[a->size];
+    //Read the array from the file
+    file.read(reinterpret_cast<char *>(a->data),
+                          a->size*sizeof(a->size));
+    //Return the Array
+    return a;
+}
+
+/**************************************************
+ *       Write a Structure to a File              *
+ **************************************************
+ * Purpose:  Write an array structure to a file
+ * Input:
+ *    file-> Where to write
+ * Output:
+ *    a-> The structure that contains the data
+ */
+void wrtStrc(fstream & file,Array *a){
+    //Write the size of the array
+    file.write(reinterpret_cast<char *>(&a->size),sizeof(a->size));
+    //Write the array elements
+    file.write(reinterpret_cast<char *>(a->data),
+                          a->size*sizeof(a->size));
 }
 
 /**************************************************
