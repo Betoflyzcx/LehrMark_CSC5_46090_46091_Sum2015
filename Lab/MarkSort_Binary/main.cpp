@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
     prntAry(array,20);
     
     //Write this to a file, Read it back, then print the results
-    cout<<"The array output to a file then read back in and printed out"<<endl;
+    cout<<"The array output to a file then read back in and print out"<<endl;
     wrtStrc(file,array);
     Array *brray=rdStruc(file);
     prntAry(brray,20);
